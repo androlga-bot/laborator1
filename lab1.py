@@ -13,7 +13,7 @@ with open('steam_description_data.csv') as f:
         pun_sym+=line.count('.')+line.count(',')+line.count('?')
         pun_sym+=line.count('!')+line.count('-')+line.count(':')
         pun_sym+=line.count(';')+line.count('(')+line.count(')')
-        words=len(re.findall("(\w+-\w+)|(\w+'\w+)|(\w+-\w+'\w+)|(\w+)",line))
+        words=len(re.findall(r"(\w+-\w+)|(\w+'\w+)|(\w+-\w+'\w+)|(\w+)",line))
         
-        sent=len(re.findall("([A-ZА-ЯЁ][^\.!?]*[\.!?])",line))
+        sent=len(re.findall(r"([A-ZА-ЯЁ][^\.!?]*[\.!?])",line))
 print(symbols,symbols-spaces,symbols-pun_sym,words,sent)
