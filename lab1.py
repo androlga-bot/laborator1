@@ -1,19 +1,19 @@
 import csv
 import re
-symbols=int()
-spaces=int()
-pun_sym=int()
-words=int()
-sent=int()
-with open('steam_description_data.csv') as f:
+symbols=0
+spaces=0
+pun_sym=0
+words=0
+sent=0
+with open('steam_description_data.csv',encoding='utf-8') as f:
     r=csv.reader(f)
-    for line in r:
+    for l in r:
+        line=','.join(l)
         symbols+=len(line)
         spaces+=line.count(' ')
         pun_sym+=line.count('.')+line.count(',')+line.count('?')
         pun_sym+=line.count('!')+line.count('-')+line.count(':')
         pun_sym+=line.count(';')+line.count('(')+line.count(')')
-        words=len(re.findall("(\w+-\w+)|(\w+'\w+)|(\w+-\w+'\w+)|(\w+)",line))
-        
-        sent=len(re.findall("([A-ZА-ЯЁ][^\.!?]*[\.!?])",line))
+        words+=len(re.findall("(\w+-\w+)|(\w+'\w+)|(\w+-\w+'\w+)|(\w+)",line))        
+        sent+=len(re.findall("([A-ZА-ЯЁ][^\.!?]*[\.!?])",line))
 print(symbols,symbols-spaces,symbols-pun_sym,words,sent)
